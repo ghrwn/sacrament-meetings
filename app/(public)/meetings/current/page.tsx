@@ -1,4 +1,5 @@
 import { redirect } from "next/navigation";
+import { connection } from "next/server";
 import { getMeetings } from "@/lib/meetings-db";
 
 function getMostRecentSundayDate(): string {
@@ -24,6 +25,7 @@ function getMostRecentSundayDate(): string {
 }
 
 export default async function CurrentMeetingPage() {
+  await connection();
   const sunday = getMostRecentSundayDate();
   const meetings = await getMeetings("", 1, sunday);
 
