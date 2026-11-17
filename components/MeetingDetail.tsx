@@ -55,7 +55,7 @@ export default function MeetingDetail({ meeting }: MeetingDetailProps) {
           </p>
 
           <h1 className="mt-3 font-serif text-2xl font-bold text-slate-900 sm:text-3xl">
-            Sacrament Meeting
+            Meeting Program
           </h1>
 
           <p className="mt-2 text-sm text-slate-500">
@@ -135,12 +135,15 @@ export default function MeetingDetail({ meeting }: MeetingDetailProps) {
           </p>
         </AgendaSection>
 
-        <AgendaSection title="Sacrament Hymn">
-          <p className="font-semibold text-slate-900">
-            Hymn {meeting.sacramentHymn.number}:{" "}
-            {meeting.sacramentHymn.title}
-          </p>
-        </AgendaSection>
+        {meeting.meetingType !== "stake" &&
+          meeting.meetingType !== "general" && (
+            <AgendaSection title="Sacrament Hymn">
+              <p className="font-semibold text-slate-900">
+                Hymn {meeting.sacramentHymn.number}:{" "}
+                {meeting.sacramentHymn.title}
+              </p>
+            </AgendaSection>
+          )}
 
         <AgendaSection title="Speakers and Musical Numbers">
           {meeting.speakers.length > 0 ? (
