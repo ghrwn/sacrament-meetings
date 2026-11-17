@@ -32,7 +32,7 @@ export default function AdminLayout({
           </nav>
         </div>
       </div>
-      <main className="mx-auto max-w-7xl px-5 py-10 sm:px-8">{children}</main>
+      <div className="mx-auto max-w-7xl px-5 py-10 sm:px-8">{children}</div>
     </div>
   );
 }
