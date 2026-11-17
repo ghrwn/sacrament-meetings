@@ -1,11 +1,11 @@
 import Image from "next/image";
+import { connection } from "next/server";
 import Link from "next/link";
 import MeetingCard from "@/components/MeetingCard";
 import { getMeetings } from "@/lib/meetings-db";
 
-export const dynamic = "force-dynamic";
-
 export default async function Home() {
+  await connection();
   const meetings = await getMeetings("", 1);
   const recentMeetings = [...meetings]
     .sort((a, b) => b.date.localeCompare(a.date))
