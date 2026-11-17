@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <Suspense
       fallback={
-        <main className="mx-auto max-w-7xl px-5 py-10 sm:px-8 sm:py-14">
+        <div className="mx-auto max-w-7xl px-5 py-10 sm:px-8 sm:py-14">
           <div className="h-10 w-72 max-w-full animate-pulse rounded bg-slate-200" />
           <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
             {[1, 2, 3].map((item) => (
@@ -143,6 +143,6 @@ async function HomeContent() {
           </p>
         </div>
       </section>
-    </main>
+    </div>
   );
 }
