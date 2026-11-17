@@ -16,7 +16,7 @@ export default function Home() {
               <div key={item} className="h-64 animate-pulse rounded-2xl bg-slate-100" />
             ))}
           </div>
-        </main>
+        </div>
       }
     >
       <HomeContent />
@@ -32,7 +32,7 @@ async function HomeContent() {
     .slice(0, 3);
 
   return (
-    <main className="mx-auto max-w-7xl px-5 py-10 sm:px-8 sm:py-14">
+    <div className="mx-auto max-w-7xl px-5 py-10 sm:px-8 sm:py-14">
       <section className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
         <div>
           <p className="text-sm font-bold uppercase tracking-[0.2em] text-amber-800">
