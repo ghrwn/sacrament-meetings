@@ -101,4 +101,5 @@ INSERT INTO meetings (
   '{"number":173,"title":"While of These Emblems We Partake"}'::jsonb,
   '[{"name":"Sister Nakamura","topic":"Personal Revelation","type":"speaker"},{"name":"Brother Santos","topic":"Temple Covenants","type":"speaker"}]'::jsonb,
   '{"number":226,"title":"Improve the Shining Moments"}'::jsonb, 'Sister Jensen'
-);
+)
+ON CONFLICT (date) DO NOTHING;
