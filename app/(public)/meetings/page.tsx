@@ -62,7 +62,9 @@ export default async function MeetingsPage({
               <MeetingCard key={meeting.id} meeting={meeting} />
             ))}
           </div>
-          <Pagination totalPages={totalPages} />
+          <Suspense fallback={<div className="mt-10 h-10 animate-pulse rounded-full bg-slate-100" />}>
+            <Pagination totalPages={totalPages} />
+          </Suspense>
         </>
       ) : (
         <div className="rounded-2xl border border-dashed border-slate-300 bg-white p-10 text-center">
