@@ -12,10 +12,15 @@ export async function GET(_request: Request, context: MeetingRouteContext) {
     return Response.json({ error: "Meeting ID must be a positive integer." }, { status: 400 });
   }
 
-  const meeting = await getMeetingById(id);
-  if (!meeting) {
-    return Response.json({ error: "Meeting not found." }, { status: 404 });
-  }
+  try {
+    const meeting = await getMeetingById(id);
+    if (!meeting) {
+      return Response.json({ error: "Meeting not found." }, { status: 404 });
+    }
 
-  return Response.json(meeting);
+    return Response.json(meeting);
+  } catch (error) {
+    console.error("GET /api/meetings/[id] database operation failed:", error);
+    return Response.json({ error: "Unable to retrieve the meeting." }, { status: 500 });
+  }
 }
