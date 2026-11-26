@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     title: "Sacrament Meeting Planner",
     description: siteDescription,
     images: [{
-      url: "/opengraph-image.jpg",
+      url: "/opengraph-image",
       width: 1200,
       height: 630,
       alt: "A peaceful chapel prepared for sacrament meeting",
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Sacrament Meeting Planner",
     description: siteDescription,
-    images: ["/opengraph-image.jpg"],
+    images: ["/opengraph-image"],
   },
 };
 
