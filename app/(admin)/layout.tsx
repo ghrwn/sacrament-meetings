@@ -1,11 +1,18 @@
 import Link from "next/link";
+import { redirect } from "next/navigation";
+import { auth } from "@/auth";
 import type { ReactNode } from "react";
 
-export default function AdminLayout({
+export default async function AdminLayout({
   children,
 }: {
   children: ReactNode;
 }) {
+  const session = await auth();
+  if (!session?.user) {
+    redirect("/login?callbackUrl=%2Fmeetings%2Fnew");
+  }
+
   return (
     <div className="min-h-[60vh] bg-slate-50">
       <div className="border-b border-slate-200 bg-slate-900 text-white">
