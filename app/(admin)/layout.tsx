@@ -1,13 +1,10 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { auth } from "@/auth";
+import { Suspense } from "react";
 import type { ReactNode } from "react";
+import { auth } from "@/auth";
 
-export default async function AdminLayout({
-  children,
-}: {
-  children: ReactNode;
-}) {
+async function ProtectedAdminContent({ children }: { children: ReactNode }) {
   const session = await auth();
   if (!session?.user) {
     redirect("/login?callbackUrl=%2Fmeetings%2Fnew");
@@ -41,5 +38,19 @@ export default async function AdminLayout({
       </div>
       <div className="mx-auto max-w-7xl px-5 py-10 sm:px-8">{children}</div>
     </div>
+  );
+}
+
+export default function AdminLayout({ children }: { children: ReactNode }) {
+  return (
+    <Suspense
+      fallback={
+        <div className="mx-auto max-w-7xl px-5 py-10 sm:px-8" aria-busy="true">
+          <p className="text-sm text-slate-500">Loading leader workspace...</p>
+        </div>
+      }
+    >
+      <ProtectedAdminContent>{children}</ProtectedAdminContent>
+    </Suspense>
   );
 }
