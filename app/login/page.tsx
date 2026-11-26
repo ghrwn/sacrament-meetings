@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Suspense } from "react";
 import LoginForm from "@/components/LoginForm";
 
 export const metadata: Metadata = {
@@ -11,7 +12,7 @@ interface LoginPageProps {
   searchParams: Promise<{ callbackUrl?: string }>;
 }
 
-export default async function LoginPage({ searchParams }: LoginPageProps) {
+async function LoginPageContent({ searchParams }: LoginPageProps) {
   const { callbackUrl } = await searchParams;
   const safeCallbackUrl =
     callbackUrl?.startsWith("/") && !callbackUrl.startsWith("//")
@@ -39,5 +40,21 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
         </Link>
       </div>
     </section>
+  );
+}
+
+export default function LoginPage({ searchParams }: LoginPageProps) {
+  return (
+    <Suspense
+      fallback={
+        <section className="mx-auto flex min-h-[65vh] max-w-7xl items-center justify-center px-5 py-12 sm:px-8">
+          <p className="text-sm text-slate-500" aria-busy="true">
+            Loading sign-in...
+          </p>
+        </section>
+      }
+    >
+      <LoginPageContent searchParams={searchParams} />
+    </Suspense>
   );
 }
