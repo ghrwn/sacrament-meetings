@@ -34,3 +34,17 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+
+## Authentication and deployment configuration
+
+The meeting-management routes (/meetings/new and /meetings/[id]/edit) require an Auth.js v5 credentials session. The public meeting archive remains available without signing in.
+
+Configure these environment variables in local development and Vercel (Development, Preview, and Production):
+
+- AUTH_SECRET: a long, random Auth.js secret (npx auth secret can generate one).
+- AUTH_ADMIN_USERNAME: the administrator username.
+- AUTH_ADMIN_PASSWORD_HASH: a bcrypt hash of the administrator password. Do not store the plain-text password in this variable or in source control.
+- AUTH_TRUST_HOST=true: allows Auth.js to trust the deployment host headers in Vercel.
+
+See .env.example for the required variable names. The credentials provider uses a single configured administrator account and JWT sessions; it does not store passwords in the application database. Each Server Action that mutates meeting records independently checks the session.
