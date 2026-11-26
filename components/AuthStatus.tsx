@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { connection } from "next/server";
 import { auth, signOut } from "@/auth";
 
 async function signOutAction() {
@@ -7,6 +8,8 @@ async function signOutAction() {
 }
 
 export default async function AuthStatus() {
+  await connection();
+
   const authConfigured = Boolean(
     process.env.AUTH_SECRET &&
       process.env.AUTH_ADMIN_USERNAME &&
