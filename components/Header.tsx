@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Suspense } from "react";
 import { connection } from "next/server";
 import NavLinks from "@/components/NavLinks";
+import AuthStatus from "@/components/AuthStatus";
 
 async function CurrentDate() {
   await connection();
@@ -40,16 +41,22 @@ export default function Header() {
           </p>
         </div>
 
-        <Suspense
-          fallback={
-            <div
-              className="h-10 w-48 animate-pulse rounded-full bg-slate-100"
-              aria-label="Loading navigation"
-            />
-          }
-        >
-          <NavLinks />
-        </Suspense>
+        <div className="flex flex-wrap items-center gap-3">
+          <Suspense
+            fallback={
+              <div className="h-10 w-48 animate-pulse rounded-full bg-slate-100" aria-label="Loading navigation" />
+            }
+          >
+            <NavLinks />
+          </Suspense>
+          <Suspense
+            fallback={
+              <div className="h-10 w-32 animate-pulse rounded-full bg-slate-100" aria-label="Loading account status" />
+            }
+          >
+            <AuthStatus />
+          </Suspense>
+        </div>
       </div>
     </header>
   );
