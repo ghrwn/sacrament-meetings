@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { auth } from "@/auth";
 import { z } from "zod";
 import type { SacramentMeeting, SpeakerItem, WardBusinessItem } from "@/lib/types";
 import {
@@ -9,6 +10,21 @@ import {
   updateMeeting as updateMeetingRecord,
   deleteMeeting as deleteMeetingRecord,
 } from "@/lib/meetings-db";
+
+async function requireAdmin() {
+  if (
+    !process.env.AUTH_SECRET ||
+    !process.env.AUTH_ADMIN_USERNAME ||
+    !process.env.AUTH_ADMIN_PASSWORD_HASH
+  ) {
+    redirect("/login?setup=1");
+  }
+
+  const session = await auth();
+  if (!session?.user) {
+    redirect("/login?callbackUrl=%2Fmeetings");
+  }
+}
 
 export type MeetingFormField =
   | "date"
@@ -197,6 +213,7 @@ export async function createMeeting(
   _previousState: MeetingFormState,
   formData: FormData,
 ): Promise<MeetingFormState> {
+  await requireAdmin();
   const rawValues = getRawFormValues(formData);
   const parsed = MeetingFormSchema.safeParse(rawValues);
   if (!parsed.success) return validationFailure(parsed.error, rawValues);
@@ -221,6 +238,7 @@ export async function updateMeeting(
   _previousState: MeetingFormState,
   formData: FormData,
 ): Promise<MeetingFormState> {
+  await requireAdmin();
   if (!Number.isInteger(id) || id <= 0) {
     throw new Error("The meeting ID is invalid. Return to the meetings list and try again.");
   }
@@ -251,6 +269,7 @@ export async function updateMeeting(
 }
 
 export async function deleteMeeting(formData: FormData): Promise<void> {
+  await requireAdmin();
   const id = Number(formData.get("id"));
   if (!Number.isInteger(id) || id <= 0) {
     throw new Error("The meeting ID is invalid. Refresh the page and try again.");
