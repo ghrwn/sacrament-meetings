@@ -15,13 +15,35 @@ const lora = Lora({
   weight: ["400", "500", "600", "700"],
 });
 
+const siteDescription =
+  "Plan, organize, review, and print sacrament meeting programs for your ward.";
+
 export const metadata: Metadata = {
+  metadataBase: new URL("https://sacrament-meetings-woad.vercel.app"),
   title: {
     default: "Sacrament Meeting Planner",
     template: "%s | Sacrament Meeting Planner",
   },
-  description:
-    "Plan, organize, review, and print sacrament meeting programs for your ward.",
+  description: siteDescription,
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    siteName: "Sacrament Meeting Planner",
+    title: "Sacrament Meeting Planner",
+    description: siteDescription,
+    images: [{
+      url: "/opengraph-image.jpg",
+      width: 1200,
+      height: 630,
+      alt: "A peaceful chapel prepared for sacrament meeting",
+    }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Sacrament Meeting Planner",
+    description: siteDescription,
+    images: ["/opengraph-image.jpg"],
+  },
 };
 
 export default function RootLayout({
