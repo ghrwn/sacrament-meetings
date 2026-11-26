@@ -1,10 +1,12 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
+import { connection } from "next/server";
 import type { ReactNode } from "react";
 import { auth } from "@/auth";
 
 async function ProtectedAdminContent({ children }: { children: ReactNode }) {
+  await connection();
   const session = await auth();
   if (!session?.user) {
     redirect("/login?callbackUrl=%2Fmeetings%2Fnew");
