@@ -18,12 +18,10 @@ export default function Image() {
           background: "linear-gradient(135deg, #0f172a 0%, #1e293b 60%, #334155 100%)",
           color: "#ffffff",
           fontFamily: "Arial, sans-serif",
-          position: "relative",
         }}
       >
         <div
           style={{
-            position: "absolute",
             right: "-110px",
             top: "-170px",
             width: "620px",
@@ -32,7 +30,7 @@ export default function Image() {
             background: "linear-gradient(145deg, rgba(217, 164, 65, 0.25), rgba(217, 164, 65, 0.02))",
           }}
         />
-        <div style={{ display: "flex", flexDirection: "column", width: "660px", zIndex: 2 }}>
+        <div style={{ display: "flex", flexDirection: "column", width: "660px" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "14px", color: "#f4c66a", fontSize: "22px", letterSpacing: "5px", fontWeight: 700 }}>
             <div style={{ width: "42px", height: "4px", background: "#f4c66a" }} />
             SUNDAY WORSHIP
@@ -48,7 +46,7 @@ export default function Image() {
             LUC BAN WARD
           </div>
         </div>
-        <div style={{ width: "320px", height: "400px", display: "flex", alignItems: "flex-end", justifyContent: "center", position: "relative", zIndex: 2 }}>
+        <div style={{ width: "320px", height: "400px", display: "flex", alignItems: "flex-end", justifyContent: "center", }}>
           <div style={{ width: "280px", height: "320px", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-end", border: "3px solid rgba(255,255,255,0.28)", borderBottom: "none", borderRadius: "150px 150px 0 0", padding: "26px 22px 0 22px", background: "linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.02))" }}>
             <div style={{ display: "flex", width: "100%", height: "165px", justifyContent: "center", alignItems: "center", gap: "14px", borderBottom: "3px solid #d9a441" }}>
               <div style={{ width: "66px", height: "140px", border: "3px solid #f4c66a", borderRadius: "34px 34px 4px 4px", background: "rgba(244,198,106,0.10)" }} />
